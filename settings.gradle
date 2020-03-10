@@ -1,0 +1,2 @@
+include ':app', ':etc'
+rootProject.name='etcDemo'

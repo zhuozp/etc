@@ -1,4 +1,4 @@
-package com.gibbon.etc.asepect;
+package com.gibbon.etc.aspect;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.gibbon.etc.annotation.RequestPermissions;
 import com.gibbon.etc.callback.IPermissionCallback;
-import com.tbruyelle.rxpermissions2.Permission;
+import com.gibbon.etc.utils.Utils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -40,7 +40,7 @@ public class ReqeustPermissionAspect {
         }
 
 
-        RequestPermissions requestPermissions = getMethodAnnotation(joinPoint, RequestPermissions.class);
+        RequestPermissions requestPermissions = Utils.getMethodAnnotation(joinPoint, RequestPermissions.class);
         String[] permissions = requestPermissions.value();
 
         Object target = joinPoint.getTarget();
@@ -70,11 +70,5 @@ public class ReqeustPermissionAspect {
                 }
             }
         });
-    }
-
-    private <T extends Annotation> T getMethodAnnotation(ProceedingJoinPoint joinPoint, Class<T> clazz) {
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
-        return method.getAnnotation(clazz);
     }
 }

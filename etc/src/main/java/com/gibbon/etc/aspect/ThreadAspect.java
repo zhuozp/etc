@@ -1,9 +1,10 @@
-package com.gibbon.etc.asepect;
+package com.gibbon.etc.aspect;
 
 import android.annotation.SuppressLint;
 
 import com.gibbon.etc.annotation.Background;
 import com.gibbon.etc.annotation.UiThread;
+import com.gibbon.etc.utils.Utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +30,7 @@ public class ThreadAspect {
     @SuppressLint("CheckResult")
     @Around("execution(@com.gibbon.etc.annotation.Background void *(..))")
     public void doBackground(final ProceedingJoinPoint joinPoint) {
-        final Background background = getMethodAnnotation(joinPoint, Background.class);
+        final Background background = Utils.getMethodAnnotation(joinPoint, Background.class);
          Single.timer(background.delay(), TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(new Consumer<Long>() {
@@ -49,7 +50,7 @@ public class ThreadAspect {
     @Around("execution(@com.gibbon.etc.annotation.UiThread void *(..))")
     public void doUiThread(final ProceedingJoinPoint joinPoint) {
 
-        UiThread uiThread = getMethodAnnotation(joinPoint, UiThread.class);
+        UiThread uiThread = Utils.getMethodAnnotation(joinPoint, UiThread.class);
 
         Single.timer(uiThread.delay(), TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.newThread())
@@ -64,13 +65,6 @@ public class ThreadAspect {
                         }
                     }
                 });
-    }
-
-
-    private <T extends Annotation> T getMethodAnnotation(ProceedingJoinPoint joinPoint, Class<T> clazz) {
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
-        return method.getAnnotation(clazz);
     }
 
 }

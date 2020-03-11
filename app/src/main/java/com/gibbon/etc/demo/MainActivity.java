@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gibbon.etc.annotation.ClickThrottle;
 import com.gibbon.etc.annotation.RequestPermissions;
 import com.gibbon.etc.annotation.UiThread;
+import com.gibbon.etc.aspect.DoubleClickAspect;
 import com.gibbon.etc.callback.IPermissionCallback;
 
 import java.util.Random;
@@ -25,9 +28,20 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.text);
         textView.setOnClickListener(new View.OnClickListener() {
+            @ClickThrottle(value = 5000)
             @Override
             public void onClick(View v) {
+                Log.d(DoubleClickAspect.TAG, "textview1 click");
                 click();
+            }
+        });
+
+        findViewById(R.id.text1).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            @ClickThrottle(value = 3000)
+            public void onClick(View v) {
+                Log.d(DoubleClickAspect.TAG, "textview2 click");
             }
         });
 

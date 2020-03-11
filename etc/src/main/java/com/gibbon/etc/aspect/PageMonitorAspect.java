@@ -1,4 +1,4 @@
-package com.gibbon.etc.asepect;
+package com.gibbon.etc.aspect;
 
 import android.content.Context;
 import android.os.SystemClock;
@@ -7,8 +7,6 @@ import android.util.Log;
 import com.gibbon.etc.UtMonitor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 
 /**
  * @author zhipeng.zhuo

@@ -3,6 +3,7 @@ package com.gibbon.etc.demo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,14 +19,12 @@ import com.gibbon.etc.callback.IPermissionCallback;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
     TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         textView = findViewById(R.id.text);
         textView.setOnClickListener(new View.OnClickListener() {
             @ClickThrottle(value = 5000)
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.text1).setOnClickListener(new View.OnClickListener() {
-
             @Override
             @ClickThrottle(value = 3000)
             public void onClick(View v) {
@@ -61,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     @UiThread(delay = 1000)
     private void click() {
         textView.setText(String.valueOf(new Random().nextInt()));
+        Intent intent = new Intent(this, AptAndAspectBothActivity.class);
+        startActivity(intent);
     }
 
     @Override

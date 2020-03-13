@@ -14,10 +14,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 
 import io.reactivex.functions.Consumer;
 

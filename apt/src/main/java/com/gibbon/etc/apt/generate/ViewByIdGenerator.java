@@ -17,7 +17,7 @@ public class ViewByIdGenerator implements IGenerator {
 
     @Override
     public void generateMethod(List<Element> elements, TypeElement typeElement, StringBuilder builder) {
-        builder.append("public void initViewById(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
+        builder.append("  public void initViewById(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
         Iterator<Element> iterator = elements.iterator();
         while (iterator.hasNext()) {
             Element element = iterator.next();
@@ -28,7 +28,7 @@ public class ViewByIdGenerator implements IGenerator {
                 iterator.remove();
             }
         }
-        builder.append("}");
+        builder.append("    }\n\n");
     }
 
     @Override
@@ -40,27 +40,27 @@ public class ViewByIdGenerator implements IGenerator {
         //获取变量名字
         String name = executableElement.getSimpleName().toString();
 
-        builder.append(" if(source instanceof android.app.Activity){\n");
-        builder.append("host." + name).append(" = ");
+        builder.append("        if(source instanceof android.app.Activity){\n");
+        builder.append("            host." + name).append(" = ");
         if (id == -1) {
             builder.append("(" + type + ")(((android.app.Activity)source).findViewById( " + "R.id." + name + "));\n");
         } else {
             builder.append("(" + type + ")(((android.app.Activity)source).findViewById( " + id + "));\n");
         }
-        builder.append("\n}else{\n");
+        builder.append("\n        } else {\n");
 
-        builder.append("host." + name).append(" = ");
+        builder.append("            host." + name).append(" = ");
         if (id == -1) {
             builder.append("(" + type + ")(((android.view.View)source).findViewById( " + "R.id." + name + "));\n");
         } else {
             builder.append("(" + type + ")(((android.view.View)source).findViewById( " + id + "));\n");
         }
-        builder.append("}\n");
+        builder.append("        }\n\n");
     }
 
     @Override
     public void generateInitMethod(StringBuilder builder) {
-        builder.append("initViewById(host,source);\n ");
+        builder.append("            initViewById(host,source);\n");
     }
 
     @Override

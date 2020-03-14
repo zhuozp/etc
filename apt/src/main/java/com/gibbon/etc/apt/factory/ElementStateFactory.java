@@ -47,7 +47,7 @@ public class ElementStateFactory {
             }
         }
 
-        builder.append('\n');
+        builder.append("\n\n");
 
 
         return builder;
@@ -59,8 +59,8 @@ public class ElementStateFactory {
     }
 
     public static void generateInjectMethods(StringBuilder builder, HashSet<Class> classList, TypeElement element) {
-        builder.append("@Override\n ");
-        builder.append("public void inject(" + element.getQualifiedName() + " host, Object source ) {\n");
+        builder.append("        @Override\n" +
+                "        public void inject(" + element.getQualifiedName() + " host, Object source ) {\n");
 
         IGenerator generate = null;
         for (Class annotation : classList) {
@@ -78,7 +78,7 @@ public class ElementStateFactory {
             }
         }
 
-        builder.append("  }\n");
+        builder.append("        }\n\n");
     }
 
     public static void generateMethods(StringBuilder builder, HashSet<Class> classList, TypeElement typeElement, List<Element> elements) {
@@ -98,7 +98,7 @@ public class ElementStateFactory {
             }
         }
 
-        builder.append('\n');
+        builder.append("\n\n");
         builder.append("}\n");
     }
 }

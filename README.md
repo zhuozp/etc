@@ -62,6 +62,12 @@ RecyclerView recyclerView;
 @ViewById
 SwipeRefreshLayout refreshView;
 ```
+使用ViewInject注入
+```
+ViewInjector.inject(this);
+或
+ViewInjector.inject(this, view);
+```
 * @DownloadMoreListener RecyclerView加载更多，apt编译
 ```
 @DownloadMoreListener(loadPosition = 5)

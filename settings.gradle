@@ -1,2 +1,2 @@
-include ':app', ':etc', ':apt', ':aptannotation'
+include ':app', ':etc', ':apt'
 rootProject.name='etcDemo'

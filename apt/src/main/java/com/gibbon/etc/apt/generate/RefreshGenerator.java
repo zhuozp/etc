@@ -24,21 +24,21 @@ public class RefreshGenerator implements IGenerator {
 
         //获取变量名字
         String mothed = executableElement.getSimpleName().toString();
-        builder.append("if (source instanceof android.app.Activity) {\n");
+        builder.append("  if (source instanceof android.app.Activity) {\n");
         if (id == -1) {
-            builder.append("view = ((SwipeRefreshLayout) (((android.app.Activity) source).findViewById(" + "R.id." + mothed + ")));\n");
+            builder.append("    view = ((SwipeRefreshLayout) (((android.app.Activity) source).findViewById(" + "R.id." + mothed + ")));\n");
         } else {
-            builder.append("view = ((SwipeRefreshLayout) (((android.app.Activity) source).findViewById(" + id + ")));\n");
+            builder.append("    view = ((SwipeRefreshLayout) (((android.app.Activity) source).findViewById(" + id + ")));\n");
         }
-        builder.append("}else{\n");
+        builder.append("  } else {\n");
         if (id == -1) {
-            builder.append("view = ((SwipeRefreshLayout) (((android.view.View) source).findViewById(" + "R.id." + mothed + ")));\n");
+            builder.append("    view = ((SwipeRefreshLayout) (((android.view.View) source).findViewById(" + "R.id." + mothed + ")));\n");
         } else {
-            builder.append("view = ((SwipeRefreshLayout) (((android.view.View) source).findViewById(" + id + ")));\n");
+            builder.append("    view = ((SwipeRefreshLayout) (((android.view.View) source).findViewById(" + id + ")));\n");
         }
-        builder.append("}\n");
+        builder.append("  }\n");
         if (colors.length > 0) {
-            builder.append("view.setColorSchemeResources(");
+            builder.append("  view.setColorSchemeResources(");
             for (int i = 0; i < colors.length; i++) {
                 if (i != colors.length - 1) {
                     builder.append(colors[i] + ",");
@@ -46,15 +46,15 @@ public class RefreshGenerator implements IGenerator {
                     builder.append(colors[i]);
                 }
             }
-            builder.append(");\n");
+            builder.append("  );\n");
         }
-        builder.append("view.setOnRefreshListener(() -> host." + mothed + "());\n");
+        builder.append("  view.setOnRefreshListener(() -> host." + mothed + "());\n");
     }
 
     @Override
     public void generateMethod(List<Element> elements, TypeElement typeElement, StringBuilder builder) {
-        builder.append("public void initRefreshView(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
-        builder.append("SwipeRefreshLayout view;\n");
+        builder.append("  public void initRefreshView(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
+        builder.append("  SwipeRefreshLayout view;\n");
         Iterator<Element> iterator = elements.iterator();
         while (iterator.hasNext()) {
             Element element = iterator.next();
@@ -65,12 +65,12 @@ public class RefreshGenerator implements IGenerator {
                 iterator.remove();
             }
         }
-        builder.append("}");
+        builder.append("  }\n\n");
     }
 
     @Override
     public void generateInitMethod(StringBuilder builder) {
-        builder.append("initRefreshView(host,source);\n");
+        builder.append("            initRefreshView(host,source);\n");
     }
 
     @Override

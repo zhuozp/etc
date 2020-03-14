@@ -18,9 +18,8 @@ public class DownLoadMoreGenerator implements IGenerator {
 
     @Override
     public void generateMethod(List<Element> elements, TypeElement typeElement, StringBuilder builder) {
-
-        builder.append("public void initDownLoadMore(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
-        builder.append("RecyclerView view;\n");
+        builder.append("  public void initDownLoadMore(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
+        builder.append("  RecyclerView view;\n");
         Iterator<Element> iterator = elements.iterator();
         while (iterator.hasNext()) {
             Element element = iterator.next();
@@ -31,7 +30,7 @@ public class DownLoadMoreGenerator implements IGenerator {
                 iterator.remove();
             }
         }
-        builder.append("}");
+        builder.append("  }\n\n");
 
 
     }
@@ -43,21 +42,22 @@ public class DownLoadMoreGenerator implements IGenerator {
 
         String method = executableElement.getSimpleName().toString();
 
-        builder.append(" if(source instanceof android.app.Activity){\n");
+
+        builder.append("        if(source instanceof android.app.Activity) {\n");
 
         if (id == -1) {
-            builder.append("view=((RecyclerView)(((android.app.Activity)source).findViewById( " + "R.id." + method + ")));\n");
+            builder.append("            view=((RecyclerView)(((android.app.Activity)source).findViewById( " + "R.id." + method + ")));\n");
         } else {
-            builder.append("view=((RecyclerView)(((android.app.Activity)source).findViewById( " + id + ")));\n");
+            builder.append("            view=((RecyclerView)(((android.app.Activity)source).findViewById( " + id + ")));\n");
         }
 
-        builder.append("\n}else{\n");
+        builder.append("\n        } else {\n");
         if (id == -1) {
-            builder.append("view=((RecyclerView)(((android.view.View)source).findViewById( " + "R.id." + method + ")));\n");
+            builder.append("            view=((RecyclerView)(((android.view.View)source).findViewById( " + "R.id." + method + ")));\n");
         } else {
-            builder.append("view=((RecyclerView)(((android.view.View)source).findViewById( " + id + ")));\n");
+            builder.append("            view=((RecyclerView)(((android.view.View)source).findViewById( " + id + ")));\n");
         }
-        builder.append("  }\n");
+        builder.append("        }\n");
 
         builder.append("view.addOnScrollListener(new RecyclerView.OnScrollListener() {\n" +
                 "            int layoutManagerType;\n" +
@@ -116,12 +116,13 @@ public class DownLoadMoreGenerator implements IGenerator {
                 "                }\n" +
                 "            }\n" +
                 "\n" +
-                "        });");
+                "        });\n\n");
     }
 
     @Override
     public void generateInitMethod(StringBuilder builder) {
-        builder.append("initDownLoadMore(host,source);\n");
+        builder.append("            initDownLoadMore(host,source);\n");
+
     }
 
     @Override

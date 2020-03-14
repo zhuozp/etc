@@ -3,6 +3,7 @@ package com.gibbon.etc.apt;
 import com.gibbon.etc.apt.annotation.DownloadMoreListener;
 import com.gibbon.etc.apt.annotation.RefreshListner;
 import com.gibbon.etc.apt.annotation.ViewById;
+import com.gibbon.etc.apt.factory.ViewInjectStateFactory;
 import com.gibbon.etc.apt.uitls.Utils;
 import com.google.auto.service.AutoService;
 
@@ -79,6 +80,9 @@ public class AptProcessor extends AbstractProcessor {
 
             return false;
         }
+
+        ViewInjectStateFactory.generateViewInject(filer);
+        ViewInjectStateFactory.generateViewInjector(filer);
 
         //生成类
         for (String key : proxyInfoHashMap.keySet()) {

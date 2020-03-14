@@ -55,6 +55,14 @@ public class ProxyInfo {
     }
 
     /**
+     * 获取包名
+     *
+     * */
+    public String getPackageName() {
+        return packageName;
+    }
+
+    /**
      * 获取全名
      *
      * @return

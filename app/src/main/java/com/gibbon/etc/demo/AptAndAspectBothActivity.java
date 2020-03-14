@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.gibbon.etc.annotation.Background;
 import com.gibbon.etc.annotation.UiThread;
 import com.gibbon.etc.apt.annotation.ViewById;
 import com.gibbon.etc.apt.annotation.DownloadMoreListener;
@@ -80,20 +81,15 @@ public class AptAndAspectBothActivity extends FragmentActivity {
     }
 
     @RefreshListner()
+    @Background
     void refreshView() {
         // TODO, in other thread, such as downloading res
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //
-                try {
-                    Thread.sleep(3000);
-                    stopRefresh();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        stopRefresh();
     }
 
     @UiThread

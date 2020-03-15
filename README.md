@@ -68,14 +68,14 @@ ViewInjector.inject(this);
 或
 ViewInjector.inject(this, view);
 ```
-* @DownloadMoreListener RecyclerView加载更多，apt编译
+* @DownloadMoreListener RecyclerView加载更多，支持LinearLayoutManager/GridLayoutManager/StaggeredGridLayoutManager，apt编译
 ```
 @DownloadMoreListener(loadPosition = 5)
     void recyclerView() {
         mockData();
     }
 ```
-* @DownloadMoreListener RecyclerView加载更多，apt编译
+* @RefreshListner 下拉刷新，SwipeRefreshLayout, apt编译
 ```
 @RefreshListner()
 @Background

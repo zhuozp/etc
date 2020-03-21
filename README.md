@@ -31,8 +31,8 @@ allprojects {
 * 只使用apt注解编译
 ```
 dependencies {
-  annotationProcessor 'com.github.zhuozp.etc:apt:v2.0.0'
-  implementation 'com.github.zhuozp.etc:apt_annotation:v2.0.0'
+  annotationProcessor 'com.github.zhuozp.etc:apt:v2.0.1'
+  implementation 'com.github.zhuozp.etc:apt_annotation:v2.0.1'
 }
 
 ```
@@ -42,7 +42,7 @@ dependencies {
 apply plugin: 'android-aspectjx'
 
 dependencies {
-  implementation 'com.github.zhuozp.etc:etc:v2.0.0'
+  implementation 'com.github.zhuozp.etc:etc:v2.0.1'
 }
 
 ```

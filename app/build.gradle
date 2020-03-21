@@ -30,7 +30,7 @@ dependencies {
 
     implementation project(":etc")
     annotationProcessor project(':apt')
-    implementation project(":apt")
+    implementation project(":apt_annotation")
 
     implementation "androidx.recyclerview:recyclerview:1.0.0"
 }

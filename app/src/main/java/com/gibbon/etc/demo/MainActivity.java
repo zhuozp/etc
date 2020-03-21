@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.text);
         textView.setOnClickListener(new View.OnClickListener() {
+
             @ClickThrottle(value = 5000)
             @Override
             public void onClick(View v) {
